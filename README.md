@@ -22,11 +22,17 @@ This Docker Compose includes the following components:
 
 ## Inferno
 
+### Build
+
 This relies on an image that must be built locally, because the image is not yet hosted anywhere. This can be done by cloning the [source code repository](https://git.codev.mitre.org/projects/ABA/repos/cypress-inferno/browse), changing into the root directory of the repository, and running:
 
 ```sh
 docker-compose build ruby_server
 ```
+
+### Usage
+
+The Inferno and CQF Ruler containers will be able to communicate, as they are on the same Docker network. Within that network, the CQF Ruler container will be given the hostname alias `cqf_ruler`. If you want to point Inferno at this instance of CQF Ruler, the URL you enter should look like `http://cqf_ruler:8080/cqf-ruler-dstu3`. 
 
 ## CQF Ruler
 
