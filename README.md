@@ -39,7 +39,7 @@ The Inferno and CQF Ruler containers will be able to communicate, as they are on
 For STU3, the base URL is `http://<host>:8080/cqf-ruler-dstu3/`.
 For R4, the base URL is `http://<host>:8080/cqf-ruler-r4/`.
 
-## NGINX
+## NDJSON File Server
 
 This serves the files at `http://<host>:7070/<file-name>`.
 
