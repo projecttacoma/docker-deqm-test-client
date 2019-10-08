@@ -4,8 +4,9 @@ This repository contains Docker Compose configuration to run the full Inferno te
 
 ## Quick Start
 
-1. See Inferno section below for instructions on building
-2. Run from the root directory of this repository:
+1. See [Inferno section](#Inferno) below for instructions on building
+2. See [Bulk Data Proxy section](#FHIR%20Bulk%20Data%20Proxy) below for instructions on building
+3. Run from the root directory of this repository:
 
 ```sh
 docker-compose up -d
@@ -18,7 +19,7 @@ This Docker Compose includes the following components:
 * [CQF Ruler](https://hub.docker.com/u/contentgroup)
 * [NGINX](https://hub.docker.com/_/nginx) NDJSON File Server
 * [Keycloak Server](https://hub.docker.com/r/jboss/keycloak/)
-
+* [Bellese Bulk Data Proxy](https://github.com/DBCG/connectathon/tree/master/fhir-bulk-proxy)
 
 ## Inferno
 
@@ -48,3 +49,24 @@ This serves the files at `http://<host>:7070/<file-name>`.
 The admin dashboard can be accessed at `http://<host>:9090/auth/admin/`.
 
 Default admin credentials are: Username: `admin`, Password: `Pa55w0rd`.
+
+## FHIR Bulk Data Proxy
+
+### Build
+
+Clone the `connectathon` repo
+
+``` bash
+git clone https://github.com/DBCG/connectathon.git
+```
+
+Change into the `fhir-bulk-proxy` directory and build the image
+
+``` bash
+cd fhir-bulk-proxy
+docker-compose build
+```
+
+### Usage
+
+To use the proxy during an Inferno sequence, point the Inferno instance at `http://fhir-bulk-proxy:5000` when selecting a module, then run the bulk data reporting sequence

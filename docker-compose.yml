@@ -23,3 +23,16 @@ services:
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
+  fhir-bulk-proxy:
+    image: fhir-bulk-proxy_fhir-bulk-proxy
+    ports:
+      - "5000:5000"
+    # NOTE: disabling s3 for our testing purposes
+    environment:
+      PORT: 5000
+      # BUCKET: fhir-bulk-out-bucket
+      SUBMISSIONURL: http://cqf_ruler:8080/cqf-ruler-dstu3/fhir
+      EXTERNALURL: http://fhir-bulk-proxy:5000
+      # RESOURCEBASEURL: s3location
+      # Region doesn't make a difference. S3 is region free but it's still required
+      REGION: us-east-1
