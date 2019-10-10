@@ -67,6 +67,16 @@ cd fhir-bulk-proxy
 docker-compose build
 ```
 
+**NOTE**: If building the proxy on the MITRE network, add the following lines to the top of the `connectathon/fhir-bulk-proxy/Dockerfile` just before the line `WORKDIR $GOPATH/src/github.com/fhir-bulk-proxy`:
+
+```
+WORKDIR /usr/local/share/ca-certificates
+ADD http://pki.mitre.org/MITRE%20BA%20Root.crt ./
+ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-3.crt ./
+ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-4.crt ./
+RUN update-ca-certificates
+```
+
 ### Usage
 
 To use the proxy during an Inferno sequence, point the Inferno instance at `http://fhir-bulk-proxy:5000` when selecting a module, then run the bulk data reporting sequence
