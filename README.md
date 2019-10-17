@@ -21,6 +21,17 @@ This Docker Compose includes the following components:
 * [Keycloak Server](https://hub.docker.com/r/jboss/keycloak/)
 * [Bellese Bulk Data Proxy](https://github.com/DBCG/connectathon/tree/master/fhir-bulk-proxy)
 
+## Inferno
+
+### Build
+
+If outside the MITRE network, the cypress-inferno image will need to be build locally. This can be done by cloning the [source code repository](https://git.codev.mitre.org/projects/ABA/repos/cypress-inferno/browse), changing into the root directory of the repository, and running:
+
+```sh
+docker-compose build ruby_server
+```
+
+Then update the docker-compose.yml to use the built image instead of the one from artifacts.mitre.org:8200.
 
 ### Usage
 
@@ -40,6 +51,25 @@ This serves the files at `http://<host>:7070/<file-name>`.
 The admin dashboard can be accessed at `http://<host>:9090/auth/admin/`.
 
 Default admin credentials are: Username: `admin`, Password: `Pa55w0rd`.
+
+## FHIR Bulk Data Proxy
+
+### Build
+
+If outside the mitre network, the fhir-bulk-proxy server will need to be built locally. Clone the `connectathon` repo
+
+``` bash
+git clone https://github.com/DBCG/connectathon.git
+```
+
+Change into the `fhir-bulk-proxy` directory and build the image
+
+``` bash
+cd fhir-bulk-proxy
+docker-compose build
+```
+
+Then update the docker-compose.yml to use the built image instead of the one from artifacts.mitre.org:8200.
 
 ### Usage
 

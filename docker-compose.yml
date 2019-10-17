@@ -2,7 +2,7 @@ version: "3"
 
 services:
   inferno:
-    image: artifacts.mitre.org:8200/cypress-inferno_ruby_server
+    image: artifacts.mitre.org:8200/cypress-inferno:0.1.0
     ports:
       - "4567:4567"
   cqf_ruler:
@@ -24,7 +24,7 @@ services:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
   fhir-bulk-proxy:
-    image: artifacts.mitre.org:8200/fhir-bulk-proxy-mitrecerts:latest
+    image: artifacts.mitre.org:8200/fhir-bulk-proxy-mitrecerts:0.1.0
     ports:
       - "5000:5000"
     # NOTE: disabling s3 for our testing purposes
