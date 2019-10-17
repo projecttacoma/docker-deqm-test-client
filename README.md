@@ -21,15 +21,6 @@ This Docker Compose includes the following components:
 * [Keycloak Server](https://hub.docker.com/r/jboss/keycloak/)
 * [Bellese Bulk Data Proxy](https://github.com/DBCG/connectathon/tree/master/fhir-bulk-proxy)
 
-## Inferno
-
-### Build
-
-This relies on an image that must be built locally, because the image is not yet hosted anywhere. This can be done by cloning the [source code repository](https://git.codev.mitre.org/projects/ABA/repos/cypress-inferno/browse), changing into the root directory of the repository, and running:
-
-```sh
-docker-compose build ruby_server
-```
 
 ### Usage
 
@@ -49,33 +40,6 @@ This serves the files at `http://<host>:7070/<file-name>`.
 The admin dashboard can be accessed at `http://<host>:9090/auth/admin/`.
 
 Default admin credentials are: Username: `admin`, Password: `Pa55w0rd`.
-
-## FHIR Bulk Data Proxy
-
-### Build
-
-Clone the `connectathon` repo
-
-``` bash
-git clone https://github.com/DBCG/connectathon.git
-```
-
-Change into the `fhir-bulk-proxy` directory and build the image
-
-``` bash
-cd fhir-bulk-proxy
-docker-compose build
-```
-
-**NOTE**: If building the proxy on the MITRE network, add the following lines to the top of the `connectathon/fhir-bulk-proxy/Dockerfile` just before the line `WORKDIR $GOPATH/src/github.com/fhir-bulk-proxy`:
-
-```
-WORKDIR /usr/local/share/ca-certificates
-ADD http://pki.mitre.org/MITRE%20BA%20Root.crt ./
-ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-3.crt ./
-ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-4.crt ./
-RUN update-ca-certificates
-```
 
 ### Usage
 
