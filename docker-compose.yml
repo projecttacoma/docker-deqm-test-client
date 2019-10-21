@@ -9,6 +9,8 @@ services:
     image: contentgroup/cqf-ruler:connectathon22-preloaded
     ports:
       - "8080:8080"
+    volumes:
+      - ./cqf-ruler-resources/jpaserver_derby_files_dstu3:/var/lib/jetty/target/jpaserver_derby_files_dstu3
   ndjson_server:
     image: nginx
     ports:
