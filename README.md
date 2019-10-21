@@ -25,11 +25,13 @@ This Docker Compose includes the following components:
 
 ### Build
 
-This relies on an image that must be built locally, because the image is not yet hosted anywhere. This can be done by cloning the [source code repository](https://git.codev.mitre.org/projects/ABA/repos/cypress-inferno/browse), changing into the root directory of the repository, and running:
+If outside the MITRE network, the cypress-inferno image will need to be build locally. This can be done by cloning the [source code repository](https://git.codev.mitre.org/projects/ABA/repos/cypress-inferno/browse), changing into the root directory of the repository, and running:
 
 ```sh
 docker-compose build ruby_server
 ```
+
+Then update the docker-compose.yml to use the built image instead of the one from artifacts.mitre.org:8200.
 
 ### Usage
 
@@ -54,7 +56,7 @@ Default admin credentials are: Username: `admin`, Password: `Pa55w0rd`.
 
 ### Build
 
-Clone the `connectathon` repo
+If outside the mitre network, the fhir-bulk-proxy server will need to be built locally. Clone the `connectathon` repo
 
 ``` bash
 git clone https://github.com/DBCG/connectathon.git
@@ -67,15 +69,7 @@ cd fhir-bulk-proxy
 docker-compose build
 ```
 
-**NOTE**: If building the proxy on the MITRE network, add the following lines to the top of the `connectathon/fhir-bulk-proxy/Dockerfile` just before the line `WORKDIR $GOPATH/src/github.com/fhir-bulk-proxy`:
-
-```
-WORKDIR /usr/local/share/ca-certificates
-ADD http://pki.mitre.org/MITRE%20BA%20Root.crt ./
-ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-3.crt ./
-ADD http://pki.mitre.org/MITRE%20BA%20NPE%20CA-4.crt ./
-RUN update-ca-certificates
-```
+Then update the docker-compose.yml to use the built image instead of the one from artifacts.mitre.org:8200.
 
 ### Usage
 
