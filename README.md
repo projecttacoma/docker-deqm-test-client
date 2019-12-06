@@ -42,6 +42,65 @@ The Inferno and CQF Ruler containers will be able to communicate, as they are on
 For STU3, the base URL is `http://<host>:8080/cqf-ruler-dstu3/`.
 For R4, the base URL is `http://<host>:8080/cqf-ruler-r4/`.
 
+### Preloading CQF Ruler
+
+To generate the cqf-ruler docker image with data already on it, the following
+steps were taken:
+
+1. Run the base cqf-ruler docker container:
+
+```
+docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler
+```
+
+2. Wait for the server to initalize and be able to accept HTTP requests:
+
+```
+until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
+```
+
+3. Clone the DBCG/connectathon repository. Note that a specific commit was used
+   so that the filepaths are predicable, as they chance once in a while.
+
+```
+git clone https://github.com/DBCG/connectathon.git
+cd connectathon && git checkout 425795fb8dd39e213140493f22e77880a9257f00
+```
+
+4. Post the resources desired to be present on the cqf-ruler image:
+
+```
+# EXM165 Measure
+curl -X POST \
+http://localhost:8080/cqf-ruler-dstu3/fhir/Measure \
+-H 'Content-Type: application/json' \
+-d @connectathon/fhir3/resources/measure/measure-EXM165_FHIR3-8.5.000.json
+
+# Libraries
+curl -X POST \
+http://localhost:8080/cqf-ruler-dstu3/fhir \
+-H 'Content-Type: application/json' \
+-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+
+# Valuesets
+curl -X POST \
+http://localhost:8080/cqf-ruler-dstu3/fhir \
+-H 'Content-Type: application/json' \
+-d @connectathon/fhir3/resources/valuesets/valuesets-EXM165_FHIR3-8.5.000.json
+```
+
+5. Add the new image to the artifacts repository. Note that this one uses tag
+   0.1.0, which should be different for future iterations.
+
+```
+docker login artifacts.mitre.org:8200
+(Enter Username/Password)
+
+docker tag contentgroup/cqf-ruler artifacts.mitre.org:8200/cqf-ruler-preloaded:0.1.0
+
+docker push artifacts.mitre.org:8200/cqf-ruler-preloaded
+```
+
 ## NDJSON File Server
 
 This serves the files at `http://<host>:7070/<file-name>`.
