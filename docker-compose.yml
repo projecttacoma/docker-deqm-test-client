@@ -6,7 +6,7 @@ services:
     ports:
       - "4567:4567"
   cqf_ruler:
-    image: artifacts.mitre.org:8200/cqf-ruler-preloaded:0.1.0
+    image: artifacts.mitre.org:8200/cqf-ruler-preloaded:0.1.1
     ports:
       - "8080:8080"
   ndjson_server:

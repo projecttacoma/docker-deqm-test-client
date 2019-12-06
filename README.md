@@ -89,14 +89,17 @@ http://localhost:8080/cqf-ruler-dstu3/fhir \
 -d @connectathon/fhir3/resources/valuesets/valuesets-EXM165_FHIR3-8.5.000.json
 ```
 
-5. Add the new image to the artifacts repository. Note that this one uses tag
-   0.1.0, which should be different for future iterations.
+5. Commit the changes and add the new image to the artifacts repository. Note
+   that this one uses tag 0.1.1, which should be different for future
+   iterations.
 
 ```
 docker login artifacts.mitre.org:8200
 (Enter Username/Password)
 
-docker tag contentgroup/cqf-ruler artifacts.mitre.org:8200/cqf-ruler-preloaded:0.1.0
+docker commit <CONTAINER_ID> # outputs IMAGE_ID
+
+docker tag <IMAGE_ID> artifacts.mitre.org:8200/cqf-ruler-preloaded:0.1.1
 
 docker push artifacts.mitre.org:8200/cqf-ruler-preloaded
 ```
