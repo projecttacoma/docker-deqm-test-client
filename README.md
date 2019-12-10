@@ -67,12 +67,26 @@ git clone https://github.com/DBCG/connectathon.git
 cd connectathon && git checkout 425795fb8dd39e213140493f22e77880a9257f00
 ```
 
-4. Post the resources desired to be present on the cqf-ruler image:
+4. POST or PUT the resources desired to be present on the cqf-ruler image:
+
+POST will not preserve ids for resources, but PUT will if the id matches the
+resource id in the json.
+
+Use POST for bundles and have PUT in the bundle request, i.e.:
+```
+"request": {
+  "method": "PUT",
+  "url": "Library/library-mat-global-common-functions-FHIR3-2.0.000"
+}
+
+```
+
+Use PUT with matching id for individual resources (see measure directly below).
 
 ```
 # EXM165 Measure
-curl -X POST \
-http://localhost:8080/cqf-ruler-dstu3/fhir/Measure \
+curl -X PUT \
+http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm165-FHIR3 \
 -H 'Content-Type: application/json' \
 -d @connectathon/fhir3/resources/measure/measure-EXM165_FHIR3-8.5.000.json
 
