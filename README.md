@@ -84,17 +84,19 @@ Use POST for bundles and have PUT in the bundle request, i.e.:
 Use PUT with matching id for individual resources (see measure directly below).
 
 ```
-# EXM165 Measure
-curl -X PUT \
-http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm165-FHIR3 \
--H 'Content-Type: application/json' \
--d @connectathon/fhir3/resources/measure/measure-EXM165_FHIR3-8.5.000.json
-
 # Libraries
 curl -X POST \
 http://localhost:8080/cqf-ruler-dstu3/fhir \
 -H 'Content-Type: application/json' \
 -d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+
+# EXM165 Measure (Also fix the library reference on this)
+sed 's+Library/library-exm165-FHIR3+Library/library-EXM165-FHIR3-8.5.000+' \
+connectathon/fhir3/resources/measure/measure-EXM165_FHIR3-8.5.000.json | \
+curl -X PUT \
+http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm165-FHIR3 \
+-H 'Content-Type: application/json' \
+-d @-
 
 # Valuesets
 curl -X POST \
