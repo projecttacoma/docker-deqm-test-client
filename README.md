@@ -9,13 +9,13 @@ This repository contains Docker Compose configuration to run the full Inferno te
 3. Run from the root directory of this repository:
 
 ```sh
-docker-compose up --build -d
+docker-compose up -d
 ```
 
 or if using the MITRE docker-compose file:
 
 ```sh
-docker-compose -f docker-compose-mitre.yml up --build -d
+docker-compose -f docker-compose-mitre.yml up -d
 ```
 
 ## Components
