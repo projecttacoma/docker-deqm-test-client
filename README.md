@@ -12,6 +12,12 @@ This repository contains Docker Compose configuration to run the full Inferno te
 docker-compose up -d
 ```
 
+or if using the MITRE docker-compose file:
+
+```sh
+docker-compose -f docker-compose-mitre.yml up -d
+```
+
 ## Components
 
 This Docker Compose includes the following components:
@@ -143,7 +149,7 @@ git clone https://github.com/DBCG/connectathon.git
 Change into the `fhir-bulk-proxy` directory and build the image
 
 ``` bash
-cd fhir-bulk-proxy
+cd fhir3/fhir-bulk-proxy
 docker-compose build
 ```
 
