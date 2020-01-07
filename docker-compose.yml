@@ -2,10 +2,10 @@ version: "3"
 
 services:
   inferno:
-    image: tacoma/deqm-test-client:0.2.0
+    image: tacoma/deqm-test-client:0.2.1-cthon1
     ports:
       - "4567:4567"
   cqf_ruler:
-    image: tacoma/cqf-ruler-preloaded:0.1.3.no-vs
+    image: tacoma/cqf-ruler-preloaded:0.1.5.no-vs.cthon1
     ports:
       - "8080:8080"
