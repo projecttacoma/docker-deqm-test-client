@@ -6,6 +6,6 @@ services:
     ports:
       - "4567:4567"
   cqf_ruler:
-    image: tacoma/cqf-ruler-preloaded:0.2.0.no-vs
+    image: tacoma/cqf-ruler-preloaded:0.3.0.no-vs
     ports:
       - "8080:8080"
