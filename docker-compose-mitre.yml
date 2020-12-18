@@ -2,7 +2,7 @@ version: "3"
 
 services:
   inferno:
-    image: tacoma/deqm-test-client:0.4.0
+    image: tacoma/deqm-test-client:latest
     volumes:
       - ./config.yml:/var/www/inferno/config.yml
     ports:
